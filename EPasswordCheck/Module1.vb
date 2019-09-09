@@ -86,18 +86,26 @@ Module Module1
         DoIDCheck = False
         Net.ServicePointManager.SecurityProtocol = Net.SecurityProtocolType.Tls12
 
-        Dim requestString As String = "https://www.uk.equifax.com/servlet/CobaltXML?request_type=ADDRESS&request_subtype=ADDRESSMATCH" &
+        Dim bodyString As String = "group=018750&user=SKENNY&password=" & GetPassword(EquPassType.ID) &
+            "&request_type=ADDRESS&request_subtype=ADDRESSMATCH&version=5" &
             "&forename=Testy" &
             "&surname=McTestFace" &
             "&house_name=123" &
             "&postcode=HZ109FH" &
-            "&date_of_birth=2017-01-01" &
-            "&group=018750" &
-            "&user=SKENNY&" &
-            "password=" & GetPassword(EquPassType.ID) &
-            "&version=5"
+            "&date_of_birth=2017-01-01"
+
+        Dim requestString As String = "https://www.uk.equifax.com/servlet/CobaltXML"
+
 
         Dim request = Net.WebRequest.Create(requestString)
+        request.Method = "POST"
+        request.ContentType = "application/x-www-form-urlencoded"
+        Dim encoding As New System.Text.ASCIIEncoding()
+        Dim _byte() As Byte = encoding.GetBytes(bodyString)
+        request.ContentLength = _byte.Length
+        Dim requestStream As IO.Stream = request.GetRequestStream
+        requestStream.Write(_byte, 0, _byte.Length)
+        requestStream.Close()
 
         Dim response = request.GetResponse()
         Dim reader As New IO.StreamReader(response.GetResponseStream)
