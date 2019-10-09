@@ -191,7 +191,7 @@ Module Module1
 
         Dim smtp As New System.Net.Mail.SmtpClient() With {
             .Host = "smtp.office365.com",
-            .Credentials = New System.Net.NetworkCredential("noreply@investandfund.com", "s)MaZ[Q!PgkJ[4L6"),
+            .Credentials = New System.Net.NetworkCredential("noreply@investandfund.com", "6jXC\b]Vg5C.%:~Q"),
             .EnableSsl = True,
             .Port = 587
         }
