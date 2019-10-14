@@ -170,9 +170,10 @@ Module Module1
     End Function
 
     Sub Main()
-
+        Dim sPW As String = ConfigurationManager.AppSettings("EPCPW")
+        Dim sUSR As String = ConfigurationManager.AppSettings("EPCUSR")
         Dim mail As New System.Net.Mail.MailMessage With {
-            .From = New Net.Mail.MailAddress("noreply@investandfund.com"),
+            .From = New Net.Mail.MailAddress(sUSR),
             .Subject = "EquiFax Password Check Response"
         }
         mail.To.Add("web@investandfund.com")
@@ -191,7 +192,7 @@ Module Module1
 
         Dim smtp As New System.Net.Mail.SmtpClient() With {
             .Host = "smtp.office365.com",
-            .Credentials = New System.Net.NetworkCredential("noreply@investandfund.com", "6jXC\b]Vg5C.%:~Q"),
+            .Credentials = New System.Net.NetworkCredential(sUSR, sPW),
             .EnableSsl = True,
             .Port = 587
         }
