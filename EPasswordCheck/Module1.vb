@@ -63,8 +63,8 @@ Module Module1
 
         Dim Client As New Net.WebClient
         Client.Headers.Add("Content-Type", "text/xml;charset=utf-8")
-        Client.Headers.Add("SOAPAction", """https://services.uk.equifax.com/xmlii/EWSConsumerService-v1_1/consumerService.wsdl""")
-        Dim sURL As String = "https://services.uk.equifax.com/xmlii/EWSConsumerService-v1_1/consumerService"
+        Client.Headers.Add("SOAPAction", """https://services.uk.equifax.com/xmlii/EWSConsumerService-v1_x/consumerService.wsdl""")
+        Dim sURL As String = "https://services.uk.equifax.com/xmlii/EWSConsumerService-v1_x/consumerService"
 
         Try
             BankResponse = Client.UploadString(sURL, ReqTemplate.OuterXml)
